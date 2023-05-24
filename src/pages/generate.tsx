@@ -1,6 +1,8 @@
 import { type NextPage } from "next";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import { useState } from "react";
+import { Button } from "../components/Button";
 import { FormGroup } from "../components/FormGroup";
 import Input from "../components/Input";
 import { generateRouter } from "../server/api/routers/generate";
@@ -13,9 +15,10 @@ const GeneratePage: NextPage = () => {
 
   // we just create generate.ts file
   // Now we have this object: generateIcon that has methods on it that we can call to generate the icon in the backend
+  // We are having the type safe in both front and back end.
   const generateIcon = api.generate.generateIcon.useMutation({
     onSuccess(data) {
-      console.log("mutation finished", data.message);
+      console.log("mutation finished", data);
     },
   });
 
@@ -40,6 +43,13 @@ const GeneratePage: NextPage = () => {
     });
   }
 
+  const session = useSession();
+  console.log(session.data);
+  // The double negation (!!value) is a shorthand way to coerce a value to a boolean.
+  // It returns true if the value is truthy and false if the value is falsy.
+  // You can't miss .data here
+  const isLoggedIn = !!session.data;
+
   return (
     <>
       <Head>
@@ -48,6 +58,26 @@ const GeneratePage: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex min-h-screen flex-col items-center justify-center">
+        {isLoggedIn ? (
+          <Button
+            onClick={() => {
+              signOut().catch(console.error);
+            }}
+          >
+            Logout
+          </Button>
+        ) : (
+          <Button
+            onClick={() => {
+              signIn().catch(console.error);
+            }}
+          >
+            Login
+          </Button>
+        )}
+
+        {session.data?.user.name}
+
         {/* <h1>Let's generate your icon.</h1> */}
         <form onSubmit={handleFormSubmit} className="flex flex-col gap-4">
           <FormGroup>
@@ -55,9 +85,7 @@ const GeneratePage: NextPage = () => {
             <Input value={form.prompt} onChange={updateForm("prompt")}></Input>
           </FormGroup>
 
-          <button className="rounded-md bg-orange-900 px-4 py-2 font-semibold uppercase hover:bg-orange-800">
-            Generate Icons
-          </button>
+          <Button>Generate Icons</Button>
         </form>
       </main>
     </>
