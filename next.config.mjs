@@ -10,6 +10,10 @@
 const config = {
   reactStrictMode: true,
 
+  images: {
+    // now you can use Next Image component to load image from url with this domain
+    domains: ["thumbs.dreamstime.com"],
+  },
   /**
    * If you have the "experimental: { appDir: true }" setting enabled, then you
    * must comment the below `i18n` config out.
