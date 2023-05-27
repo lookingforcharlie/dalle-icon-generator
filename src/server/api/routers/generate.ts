@@ -20,6 +20,8 @@ const s3 = new AWS.S3({
   region: "us-east-1",
 });
 
+const BUCKET_NAME = "dalle-icon-generator";
+
 const configuration = new Configuration({
   apiKey: env.DALLE_API_KEY,
 });
@@ -114,7 +116,7 @@ export const generateRouter = createTRPCRouter({
       //TODO: Save the images to the S3 bucket
       await s3
         .putObject({
-          Bucket: "dalle-icon-generator",
+          Bucket: BUCKET_NAME,
           Body: Buffer.from(base64EncodedImage!, "base64"),
           Key: icon.id, // TODO: generate a random ID for the key
           ContentEncoding: "base64",
@@ -124,8 +126,9 @@ export const generateRouter = createTRPCRouter({
 
       return {
         // input carries 'prompt' we send it in
-        message: `Your prompt for generating icons: '${input.prompt}'`,
-        imageUrl: base64EncodedImage,
+        message: `Sending from generate.ts file,Your prompt: '${input.prompt}'`,
+        // imageUrl: base64EncodedImage, // Now, we sent back the actual image, it's big, especially user generates 5 images at a time, it will be expensive to display them on the page.
+        imageUrl: `https://${BUCKET_NAME}.s3.amazonaws.com/${icon.id}`,
       };
     }),
 });

@@ -105,18 +105,19 @@ const GeneratePage: NextPage = () => {
         </form>
 
         {/* Use Next Image component, we need to give the permission to hit the url */}
-        {/* <Image
+        <Image
+          src={imgUrl}
+          alt="generated image from your prompt"
+          width={100}
+          height={100}
+        />
+        {/* <img
+          // src={`data:image/png;base64, ${imgUrl}`} // with the prefix of 'data:image/png;base64', img tag can show pics using base64 format
           src={imgUrl}
           alt="generated image from your prompt"
           width={100}
           height={100}
         /> */}
-        <img
-          src={`data:image/png;base64, ${imgUrl}`} // with the prefix of 'data:image/png;base64', img tag can show pics using base64 format
-          alt="generated image from your prompt"
-          width={100}
-          height={100}
-        />
       </main>
     </>
   );

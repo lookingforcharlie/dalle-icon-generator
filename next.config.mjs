@@ -12,7 +12,7 @@ const config = {
 
   images: {
     // now you can use Next Image component to load image from url with this domain
-    domains: ["thumbs.dreamstime.com"],
+    domains: ["thumbs.dreamstime.com", "dalle-icon-generator.s3.amazonaws.com"],
   },
   /**
    * If you have the "experimental: { appDir: true }" setting enabled, then you

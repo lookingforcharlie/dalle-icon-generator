@@ -52,3 +52,10 @@
 1. Create 'model Icon'
 2. Save the 'prompt' in the db
 3. npx prisma db push -> npx prisma studio: restart the server to apply the changes
+
+- Display all the icons on the page using url hosted on AWS S3 Bucket - config the Bucket to be a static host
+
+1. Go to your Bucket -> Properties -> Static website hosting - Enable -> Input 'index.html' for Index document.
+2. Go to your Bucket -> Permissions -> Block public access -> edit -> uncheck Block all public access (Everyone can go to your bucket, if they know your id.)
+3. Go to your Bucket -> Bucket policy -> Edit -> Click to show 'Policy Example Page' -> Add customized policy to input field
+4. In Permissions -> Cross-origin resource sharing (CORS) -> Add cors policy from examples
