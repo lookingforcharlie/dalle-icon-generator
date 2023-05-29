@@ -59,3 +59,14 @@
 2. Go to your Bucket -> Permissions -> Block public access -> edit -> uncheck Block all public access (Everyone can go to your bucket, if they know your id.)
 3. Go to your Bucket -> Bucket policy -> Edit -> Click to show 'Policy Example Page' -> Add customized policy to input field
 4. In Permissions -> Cross-origin resource sharing (CORS) -> Add cors policy from examples
+
+- Setup Stripe: user pays to buy credits, you will receive the money, and increment certain amount of credits for the user
+
+1. Go to Stripe to create an account, get public and secret keys, setup .env and env.mjs
+2. Allow user to create checkout session: Server -> api -> routers -> root.ts -> add a router called 'checkout'
+3. npm install stripe --save
+4. https://stripe.com/docs/api/checkout/sessions/create , get the create Session code
+5. create checkout.ts for new router, add code in it
+6. npm i --save @stripe/stripe-js: allow run Stripe at the frontend
+7. Create custom hook of useBuyCredits, create a button of 'buy Credit' on page
+8. https://dashboard.stripe.com/account/payments/settings , for setting the payment methods

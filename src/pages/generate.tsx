@@ -10,8 +10,11 @@ import { generateRouter } from "../server/api/routers/generate";
 import { api } from "../utils/api";
 
 import { b64Image } from "../data/image";
+import { useBuyCredits } from "../hooks/useBuyCredits";
 
 const GeneratePage: NextPage = () => {
+  const { buyCredits } = useBuyCredits();
+
   const [form, setForm] = useState({
     prompt: "",
   });
@@ -75,13 +78,16 @@ const GeneratePage: NextPage = () => {
       </Head>
       <main className="flex min-h-screen flex-col items-center justify-center">
         {isLoggedIn ? (
-          <Button
-            onClick={() => {
-              signOut().catch(console.error);
-            }}
-          >
-            Logout
-          </Button>
+          <>
+            <Button onClick={buyCredits}>Buy Credits</Button>
+            <Button
+              onClick={() => {
+                signOut().catch(console.error);
+              }}
+            >
+              Logout
+            </Button>
+          </>
         ) : (
           <Button
             onClick={() => {
