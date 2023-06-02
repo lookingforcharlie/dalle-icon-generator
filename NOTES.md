@@ -79,3 +79,11 @@
 - Work on prompt, add radio buttons for style, shape and color
 
 1. Show spinner in the button, check Button.tsx reusable component, check Spinner.tsx, got it from flowbite: https://flowbite.com/docs/components/spinner/
+
+- Setup Supabase
+
+1. https://supabase.com/docs/guides/integrations/prisma
+2. Get the connection string (Database URL) for Prisma, put it into .env
+3. Modify schema.prisma, run 'npx prisma db push' to sync the local prisma schema to supabase
+
+- Deployment - AWS Amplify
