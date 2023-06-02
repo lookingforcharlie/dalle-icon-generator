@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 body {
-  @apply bg-gray-100 dark:bg-[#1D373D] dark:text-[#EDCEAD];
+  @apply bg-gray-100 dark:bg-[#1D373D] dark:bg-gradient-to-b dark:from-[#1D373D]  dark:to-[#15162c] dark:text-[#EDCEAD];
 }

@@ -70,3 +70,8 @@
 6. npm i --save @stripe/stripe-js: allow run Stripe at the frontend
 7. Create custom hook of useBuyCredits, create a button of 'buy Credit' on page
 8. https://dashboard.stripe.com/account/payments/settings , for setting the payment methods
+9. Create a test product in Stripe Dashboard, get the product_id, click 'buy Credit', you will see the checkout session page
+10. Setup the webhook, setup local stripe listener, strip cli brew: https://stripe.com/docs/stripe-cli
+11. You need stripe cli tool setup, so you can emulate this websocket event on your local machine
+12. add "stripe:listen": "stripe listen --forward-to localhost:3000/api/stripe" to package.json
+13. create stripe.ts file

@@ -25,10 +25,10 @@ const server = z.object({
   DALLE_MOCK: z.string(),
   SECRET_ACCESS_KEY: z.string(),
   ACCESS_KEY_ID: z.string(),
-  NEXT_PUBLIC_STRIPE_KEY: z.string(), // NEXT_PUBLIC prefixed variable will show up in the frontend
   STRIPE_SECRET_KEY: z.string(),
   HOST_NAME: z.string(),
   PRICE_ID: z.string(),
+  STRIPE_WEB_HOOK_SECRET: z.string(),
 });
 
 /**
@@ -37,6 +37,7 @@ const server = z.object({
  */
 const client = z.object({
   // NEXT_PUBLIC_CLIENTVAR: z.string().min(1),
+  NEXT_PUBLIC_STRIPE_KEY: z.string(), // NEXT_PUBLIC prefixed variable will show up in the frontend
 });
 
 /**
@@ -60,6 +61,7 @@ const processEnv = {
   STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
   HOST_NAME: process.env.HOST_NAME,
   PRICE_ID: process.env.PRICE_ID,
+  STRIPE_WEB_HOOK_SECRET: process.env.STRIPE_WEB_HOOK_SECRET,
   // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
 };
 
