@@ -1,8 +1,10 @@
 import React from "react";
+import Spinner from "./Spinner";
 
 export const Button = (
   props: React.ComponentPropsWithoutRef<"button"> & {
     variant: "primary" | "secondary";
+    isLoading?: boolean;
   }
 ) => {
   const color =
@@ -14,9 +16,10 @@ export const Button = (
   return (
     <button
       {...props}
-      className={`rounded-md bg-orange-900 px-4 py-2 text-base uppercase ${color}`}
+      className={`flex items-center justify-center rounded-md bg-orange-900 px-4 py-2 text-base uppercase disabled:bg-gray-600 ${color}`}
     >
-      {props.children}
+      {props.isLoading && <Spinner />}
+      {!props.isLoading && props.children}
     </button>
   );
 };

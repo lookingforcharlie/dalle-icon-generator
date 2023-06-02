@@ -6,7 +6,7 @@ const PrimaryLinkButton = (
 ) => {
   return (
     <Link
-      className="self-start rounded-md bg-orange-900 px-4 py-2 text-base uppercase hover:bg-orange-800"
+      className="self-start rounded-md bg-orange-900 px-6 py-4 text-base uppercase hover:bg-orange-800"
       {...props}
     >
       {props.children}

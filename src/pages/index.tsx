@@ -13,7 +13,7 @@ function HeroBanner() {
           waiiting for them to create them for you.
         </p>
         <div className="">
-          <PrimaryLinkButton href="/generate">Generate Icons</PrimaryLinkButton>
+          <PrimaryLinkButton href="/generate">Get Started</PrimaryLinkButton>
         </div>
       </div>
 

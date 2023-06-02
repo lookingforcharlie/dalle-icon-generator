@@ -57,6 +57,7 @@ export const generateRouter = createTRPCRouter({
     .input(
       z.object({
         prompt: z.string(),
+        color: z.string(),
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -101,8 +102,9 @@ export const generateRouter = createTRPCRouter({
       // if (!response.data.data[0]) return;
       // const url = response.data.data[0].url;
 
+      const finalPrompt = `a mordern icon in ${input.color} of a ${input.prompt}, pixel style, minimalistic, dark background`;
       // created a DALLE_MOCK and a function, so that we don't need to hit the real api every time
-      const base64EncodedImage = await generateIcons(input.prompt);
+      const base64EncodedImage = await generateIcons(finalPrompt);
 
       // Create and keep track on the icon we just generated
       // After we created it in the db
@@ -134,3 +136,7 @@ export const generateRouter = createTRPCRouter({
 });
 
 // https://thumbs.dreamstime.com/z/cute-bunny-holding-carrot-thin-line-vector-icon-rabbit-linear-graphic-symbol-isolated-white-logo-design-concept-cute-rabbit-150521474.jpg
+
+// Prompt
+// a mordern icon in ${input.color} of a ${input.prompt}, 3D rendered, metallic material, shiny, minimalist
+// a mordern icon in ${input.color} of a ${input.prompt}, pixel style, minimalistic, dark background

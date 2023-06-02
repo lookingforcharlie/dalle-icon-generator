@@ -75,3 +75,7 @@
 11. You need stripe cli tool setup, so you can emulate this websocket event on your local machine
 12. add "stripe:listen": "stripe listen --forward-to localhost:3000/api/stripe" to package.json
 13. create stripe.ts file
+
+- Work on prompt, add radio buttons for style, shape and color
+
+1. Show spinner in the button, check Button.tsx reusable component, check Spinner.tsx, got it from flowbite: https://flowbite.com/docs/components/spinner/
