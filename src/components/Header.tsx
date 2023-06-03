@@ -42,10 +42,15 @@ const Header = () => {
             className="align-self flex h-16 self-center"
           />
         </PrimaryLink>
-        <ul className="flex self-center">
+        <ul className="flex gap-4 self-center">
           <li>
             <PrimaryLink href="/generate">Generate Icons</PrimaryLink>
           </li>
+          {isLoggedIn && (
+            <li>
+              <PrimaryLink href="/collection">Collection</PrimaryLink>
+            </li>
+          )}
         </ul>
       </div>
       <div>

@@ -129,4 +129,7 @@ How to fix it? add following into rules of .eslintrc.cjs
 4. https://master.d1lhwjhb4w0vwe.amplifyapp.com/
 5. Setup a domain (sub-domain), and point to this application, then we gonna go back through all the google authentication configurations, add access to that domain
 6. go to https://domains.google.com/, works with AWS Domain management, setup production looks domain, https://icons.meetxb.com/
-7. Right now, when I sign in with google auth, browser redirects me to localhost:3000, we don't want that, so we setup host_name to https://icons.meetxb.com
+7. Right now, when I sign in with google auth, browser redirects me to localhost:3000, we don't want that, so we setup host_name and NEXTAUTH_URL to https://icons.meetxb.com in AWS Amplify
+8. Add new endpoint for webhooks in Stripe
+9. Part 26, round 20:00, talking about setup Stripe when you want to go production.
+10. Every time you modify a environmet variable, you need to redeploy the app again
