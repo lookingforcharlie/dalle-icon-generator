@@ -1,7 +1,6 @@
 // Add <Header /> into <SessionProvider /> in _app.tsx, if you want Header component show up in each page
 
 import { signIn, signOut, useSession } from "next-auth/react";
-import { FC } from "react";
 import rabbit_no_bg from "../../public/media/rabbit_bot_no_bg.png";
 import { useBuyCredits } from "../hooks/useBuyCredits";
 import { Button } from "./Button";
