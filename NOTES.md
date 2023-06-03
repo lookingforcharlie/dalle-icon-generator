@@ -87,3 +87,25 @@
 3. Modify schema.prisma, run 'npx prisma db push' to sync the local prisma schema to supabase
 
 - Deployment - AWS Amplify
+
+1. put following into 'build commands'
+
+```
+- env | grep -e NEXT_PUBLIC_ >> .env.production
+- env | grep -e DATABASE_URL >> .env.production
+- env | grep -e STRIPE_SECRET_KEY >> .env.production
+- env | grep -e STRIPE_WEB_HOOK_SECRET >> .env.production
+- env | grep -e HOST_NAME >> .env.production
+- env | grep -e PRICE_ID >> .env.production
+- env | grep -e NEXTAUTH_SECRET >> .env.production
+- env | grep -e NEXTAUTH_URL >> .env.production
+- env | grep -e GOOGLE_CLIENT_ID >> .env.production
+- env | grep -e GOOGLE_CLIENT_SECRET >> .env.production
+- env | grep -e DALLE_API_KEY >> .env.production
+- env | grep -e DALLE_MOCK >> .env.production
+- env | grep -e SECRET_ACCESS_KEY >> .env.production
+- env | grep -e ACCESS_KEY_ID >> .env.production
+- echo "NODE_ENV=production" >> .env.production
+```
+
+2. Adding environment variables one by one, we will come back to change Host_name to real domain where we host our application

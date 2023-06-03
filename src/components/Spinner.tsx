@@ -1,8 +1,4 @@
-import { FC } from "react";
-
-interface SpinnerProps {}
-
-const Spinner: FC<SpinnerProps> = ({}) => {
+const Spinner = () => {
   return (
     <div className="text-center">
       <div role="status">

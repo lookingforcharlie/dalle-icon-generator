@@ -5,10 +5,9 @@ import { useState } from "react";
 import { Button } from "../components/Button";
 import { FormGroup } from "../components/FormGroup";
 import Input from "../components/Input";
-import { generateRouter } from "../server/api/routers/generate";
 import { api } from "../utils/api";
 
-import { b64Image } from "../data/image";
+// import { b64Image } from "../data/image";
 
 const colors = [
   "blue",

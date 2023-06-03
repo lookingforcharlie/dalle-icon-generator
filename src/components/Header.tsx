@@ -1,17 +1,13 @@
 // Add <Header /> into <SessionProvider /> in _app.tsx, if you want Header component show up in each page
 
 import { signIn, signOut, useSession } from "next-auth/react";
-import { StaticImageData } from "next/image";
-import Link from "next/link";
 import { FC } from "react";
 import rabbit_no_bg from "../../public/media/rabbit_bot_no_bg.png";
 import { useBuyCredits } from "../hooks/useBuyCredits";
 import { Button } from "./Button";
 import PrimaryLink from "./PrimaryLink";
 
-interface HeaderProps {}
-
-const Header: FC<HeaderProps> = ({}) => {
+const Header = () => {
   // useSession() is from next-auth
   const session = useSession();
   // console.log(session.data);
@@ -21,6 +17,21 @@ const Header: FC<HeaderProps> = ({}) => {
   const isLoggedIn = !!session.data;
 
   const { buyCredits } = useBuyCredits();
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+    } catch (error) {
+      console.log((error as Error).message);
+    }
+  };
+  const handleSignIn = async () => {
+    try {
+      await signIn();
+    } catch (error) {
+      console.log((error as Error).message);
+    }
+  };
 
   return (
     <header className="container mx-auto my-3  flex h-16 max-w-6xl items-center justify-between px-2 sm:px-6">
@@ -44,23 +55,13 @@ const Header: FC<HeaderProps> = ({}) => {
             <Button variant="secondary" onClick={buyCredits}>
               Buy Credits
             </Button>
-            <Button
-              variant="primary"
-              onClick={() => {
-                signOut().catch(console.error); // doing this for ESLint, same as {signOut}
-              }}
-            >
+            <Button variant="primary" onClick={handleSignOut}>
               Logout
             </Button>
           </div>
         ) : (
           <div className="flex gap-4">
-            <Button
-              variant="secondary"
-              onClick={() => {
-                signIn().catch(console.error);
-              }}
-            >
+            <Button variant="secondary" onClick={handleSignIn}>
               Login
             </Button>
           </div>
