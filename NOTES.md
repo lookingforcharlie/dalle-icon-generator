@@ -133,3 +133,12 @@ How to fix it? add following into rules of .eslintrc.cjs
 8. Add new endpoint for webhooks in Stripe
 9. Part 26, round 20:00, talking about setup Stripe when you want to go production.
 10. Every time you modify a environmet variable, you need to redeploy the app again
+
+## Creating the collection pages
+
+## Implement generating multiple icons at one batch
+
+1. Add numberOfIcons input in generate.tsx file, add numberOfIcons in generate.ts at the backend
+2. Modified function generateIcons in generate.ts, modified the return value from a string to an Array of String
+3. Now, generateRouter returns an Array of image urls.
+4. In the frontend, the imagesUrl becomes an Array of String, we need loop through imagesUrl to render multiple icons on the page

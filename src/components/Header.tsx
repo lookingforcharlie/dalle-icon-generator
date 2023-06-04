@@ -3,6 +3,7 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import rabbit_no_bg from "../../public/media/rabbit_bot_no_bg.png";
 import { useBuyCredits } from "../hooks/useBuyCredits";
+import { api } from "../utils/api";
 import { Button } from "./Button";
 import PrimaryLink from "./PrimaryLink";
 
@@ -32,6 +33,8 @@ const Header = () => {
     }
   };
 
+  const credits = api.user.getUserCredits.useQuery().data;
+
   return (
     <header className="container mx-auto my-3  flex h-16 max-w-6xl items-center justify-between px-2 sm:px-6">
       <div className="flex gap-6 self-center">
@@ -46,6 +49,9 @@ const Header = () => {
           <li>
             <PrimaryLink href="/generate">Generate Icons</PrimaryLink>
           </li>
+          <li>
+            <PrimaryLink href="/community">Community</PrimaryLink>
+          </li>
           {isLoggedIn && (
             <li>
               <PrimaryLink href="/collection">Collection</PrimaryLink>
@@ -56,6 +62,9 @@ const Header = () => {
       <div>
         {isLoggedIn ? (
           <div className="flex gap-4">
+            <div className="self-center rounded-md border border-pink-600 px-4 py-2 text-pink-600">
+              {`${credits} credits left`}
+            </div>
             <Button variant="secondary" onClick={buyCredits}>
               Buy Credits
             </Button>

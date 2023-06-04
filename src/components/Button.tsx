@@ -20,6 +20,7 @@ export const Button = (
     >
       {props.isLoading && <Spinner />}
       {!props.isLoading && props.children}
+      {/* {props.children} */}
     </button>
   );
 };

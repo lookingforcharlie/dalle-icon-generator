@@ -25,19 +25,20 @@ const configuration = new Configuration({
 // make an openai object
 const openai = new OpenAIApi(configuration);
 
-async function generateIcons(prompt: string): Promise<string | undefined> {
+async function generateIcons(prompt: string, numOfIcons = 1) {
   if (env.DALLE_MOCK === "true") {
-    return b64Image;
+    // return an Array of images, because user might choose to generate multiple icons
+    return new Array(numOfIcons).fill(b64Image);
   } else {
     const response = await openai.createImage({
       prompt,
-      n: 1, //You can request 1-10 images at a time using the n parameter.
+      n: numOfIcons, //You can request 1-10 images at a time using the n parameter.
       size: "256x256", //images can have a size of 256x256, 512x512, or 1024x1024 pixels.
       response_format: "b64_json", // We are using b64_json for storing images to S3
     });
-    if (!response.data.data[0]) return;
+    if (!response.data.data) return;
 
-    return response.data.data[0].b64_json;
+    return response.data.data.map((result) => result.b64_json || "");
   }
 }
 
@@ -54,6 +55,8 @@ export const generateRouter = createTRPCRouter({
       z.object({
         prompt: z.string(),
         color: z.string(),
+        shape: z.string(),
+        numberOfIcons: z.number().min(1).max(5),
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -66,12 +69,14 @@ export const generateRouter = createTRPCRouter({
         where: {
           id: ctx.session.user.id, // TODO: Replaced with a real id
           credit: {
-            gte: 1, // gte: greater than or equal
+            // gte: 1, // gte: greater than or equal
+            gte: input.numberOfIcons, // gte: greater than or equal
           },
         },
         data: {
           credit: {
-            decrement: 1,
+            // decrement: 1,
+            decrement: input.numberOfIcons,
           },
         },
       });
@@ -98,41 +103,54 @@ export const generateRouter = createTRPCRouter({
       // if (!response.data.data[0]) return;
       // const url = response.data.data[0].url;
 
-      const finalPrompt = `a mordern icon in ${input.color} of a ${input.prompt}, pixel style, minimalistic, dark background`;
+      const finalPrompt = `a modern ${input.shape} icon in ${input.color} of a ${input.prompt}, 3D rendered, chalkboard, minimalist, high quality, trending on art station, unreal engine graphics quality`;
+
       // created a DALLE_MOCK and a function, so that we don't need to hit the real api every time
-      const base64EncodedImage = await generateIcons(finalPrompt);
+      // Now, base64EncodedImage returns an Array now.
+      const base64EncodedImage = await generateIcons(
+        finalPrompt,
+        input.numberOfIcons
+      );
 
-      // Create and keep track on the icon we just generated
-      // After we created it in the db
-      const icon = await ctx.prisma.icon.create({
-        data: {
-          prompt: input.prompt,
-          userId: ctx.session.user.id,
-        },
-      });
-
-      //TODO: Save the images to the S3 bucket
-      await s3
-        .putObject({
-          Bucket: BUCKET_NAME,
-          Body: Buffer.from(base64EncodedImage!, "base64"),
-          Key: icon.id, // TODO: generate a random ID for the key
-          ContentEncoding: "base64",
-          ContentType: "image/gif",
+      const createdIcons = await Promise.all(
+        // Let's loop through base64EncodedImage
+        base64EncodedImage!.map(async (img) => {
+          // Create and keep track on the icon we just generated
+          // After we created it in the db
+          const icon = await ctx.prisma.icon.create({
+            data: {
+              prompt: input.prompt,
+              userId: ctx.session.user.id,
+            },
+          });
+          //TODO: Save the images to the S3 bucket
+          await s3
+            .putObject({
+              Bucket: BUCKET_NAME,
+              Body: Buffer.from(img, "base64"),
+              Key: icon.id, // TODO: generate a random ID for the key
+              ContentEncoding: "base64",
+              ContentType: "image/gif",
+            })
+            .promise();
+          return icon;
         })
-        .promise();
+      );
 
-      return {
-        // input carries 'prompt' we send it in
-        message: `Sending from generate.ts file,Your prompt: '${input.prompt}'`,
-        // imageUrl: base64EncodedImage, // Now, we sent back the actual image, it's big, especially user generates 5 images at a time, it will be expensive to display them on the page.
-        imageUrl: `https://${BUCKET_NAME}.s3.amazonaws.com/${icon.id}`,
-      };
+      // Now we return a bunch of objects
+      return createdIcons.map((icon) => {
+        return {
+          // input carries 'prompt' we send it in
+          message: `I come from the prompt: '${input.prompt}'`,
+          // imageUrl: base64EncodedImage, // Now, we sent back the actual image, it's big, especially user generates 5 images at a time, it will be expensive to display them on the page.
+          imageUrl: `https://${BUCKET_NAME}.s3.amazonaws.com/${icon.id}`,
+        };
+      });
     }),
 });
 
 // https://thumbs.dreamstime.com/z/cute-bunny-holding-carrot-thin-line-vector-icon-rabbit-linear-graphic-symbol-isolated-white-logo-design-concept-cute-rabbit-150521474.jpg
 
 // Prompt
-// a mordern icon in ${input.color} of a ${input.prompt}, 3D rendered, metallic material, shiny, minimalist
-// a mordern icon in ${input.color} of a ${input.prompt}, pixel style, minimalistic, dark background
+// a modern icon in ${input.color} of a ${input.prompt}, 3D rendered, metallic material, shiny, minimalist
+// a modern icon in ${input.color} of a ${input.prompt}, pixel style, minimalistic, dark background
