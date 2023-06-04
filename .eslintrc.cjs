@@ -33,6 +33,8 @@ const config = {
         },
       },
     ],
+    "@typescript-eslint/no-unsafe-argument": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
   },
 };
 

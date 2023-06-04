@@ -1,6 +1,7 @@
 // Add <Header /> into <SessionProvider /> in _app.tsx, if you want Header component show up in each page
 
 import { signIn, signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 import rabbit_no_bg from "../../public/media/rabbit_bot_no_bg.png";
 import { useBuyCredits } from "../hooks/useBuyCredits";
 import { api } from "../utils/api";
@@ -39,10 +40,12 @@ const Header = () => {
     <header className="container mx-auto my-3  flex h-16 max-w-6xl items-center justify-between px-2 sm:px-6">
       <div className="flex gap-6 self-center">
         <PrimaryLink href="/">
-          <img
-            src={rabbit_no_bg.src}
-            alt="Rabbit Logo"
-            className="align-self flex h-16 self-center"
+          <Image
+            src="/media/rabbit_bot_no_bg.png"
+            alt="Site logo"
+            width={80}
+            height={80}
+            className="align-self flex self-center"
           />
         </PrimaryLink>
         <ul className="flex gap-4 self-center">

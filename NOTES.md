@@ -144,3 +144,13 @@ How to fix it? add following into rules of .eslintrc.cjs
 4. In the frontend, the imagesUrl becomes an Array of String, we need loop through imagesUrl to render multiple icons on the page
 
 ## Adding shape and style option for generating icons
+
+## What's next?
+
+1. Add Indication at Landing Page
+2. Perhaps add a demo video how to use it.
+3. Add footer
+4. Replace the user options with images
+5. Modify Stripe settings if go Production: toggle to Production mode, set different keys on Amplify
+6. Setup PostgreSql locally: don't mess up with the users database, when developing locally.
+7. use S3 locally by Mock? Create a different bucket
