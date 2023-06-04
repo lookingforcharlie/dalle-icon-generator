@@ -25,13 +25,10 @@ const configuration = new Configuration({
 // make an openai object
 const openai = new OpenAIApi(configuration);
 
-async function generateIcons(
-  prompt: string,
-  numOfIcons = 1
-): Promise<string[]> {
+async function generateIcons(prompt: string, numOfIcons = 1) {
   if (env.DALLE_MOCK === "true") {
     // return an Array of images, because user might choose to generate multiple icons
-    return new Array(numOfIcons).fill(b64Image) as string[];
+    return new Array(numOfIcons).fill(b64Image);
   } else {
     const response = await openai.createImage({
       prompt,
@@ -40,9 +37,7 @@ async function generateIcons(
       response_format: "b64_json", // We are using b64_json for storing images to S3
     });
 
-    return response.data.data.map(
-      (result) => result.b64_json || ""
-    ) as string[];
+    return response.data.data.map((result) => result.b64_json || "");
   }
 }
 
@@ -119,7 +114,7 @@ export const generateRouter = createTRPCRouter({
 
       const createdIcons = await Promise.all(
         // Let's loop through base64EncodedImage
-        base64EncodedImage!.map(async (img) => {
+        base64EncodedImage.map(async (img) => {
           // Create and keep track on the icon we just generated
           // After we created it in the db
           const icon = await ctx.prisma.icon.create({
