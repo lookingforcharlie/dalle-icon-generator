@@ -33,7 +33,7 @@ async function generateIcons(prompt: string, numOfIcons = 1) {
     const response = await openai.createImage({
       prompt,
       n: numOfIcons, //You can request 1-10 images at a time using the n parameter.
-      size: "256x256", //images can have a size of 256x256, 512x512, or 1024x1024 pixels.
+      size: "512x512", //images can have a size of 256x256, 512x512, or 1024x1024 pixels.
       response_format: "b64_json", // We are using b64_json for storing images to S3
     });
     if (!response.data.data) return;
@@ -56,6 +56,7 @@ export const generateRouter = createTRPCRouter({
         prompt: z.string(),
         color: z.string(),
         shape: z.string(),
+        style: z.string(),
         numberOfIcons: z.number().min(1).max(5),
       })
     )
@@ -103,7 +104,7 @@ export const generateRouter = createTRPCRouter({
       // if (!response.data.data[0]) return;
       // const url = response.data.data[0].url;
 
-      const finalPrompt = `a modern ${input.shape} icon in ${input.color} of a ${input.prompt}, 3D rendered, chalkboard, minimalist, high quality, trending on art station, unreal engine graphics quality`;
+      const finalPrompt = `a modern ${input.shape} icon in ${input.color} of a ${input.prompt}, ${input.style}, high quality, unreal engine graphics quality`;
 
       // created a DALLE_MOCK and a function, so that we don't need to hit the real api every time
       // Now, base64EncodedImage returns an Array now.

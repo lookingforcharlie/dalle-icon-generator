@@ -142,3 +142,5 @@ How to fix it? add following into rules of .eslintrc.cjs
 2. Modified function generateIcons in generate.ts, modified the return value from a string to an Array of String
 3. Now, generateRouter returns an Array of image urls.
 4. In the frontend, the imagesUrl becomes an Array of String, we need loop through imagesUrl to render multiple icons on the page
+
+## Adding shape and style option for generating icons

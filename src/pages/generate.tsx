@@ -20,6 +20,20 @@ const colors = [
   "black",
 ];
 const shapes = ["square", "circle", "rounded"];
+const styles = [
+  "metallic",
+  "3d",
+  "pixelated",
+  "gradient",
+  "illustrated",
+  "minimalistic",
+  "hand-drawn",
+  "line-art",
+  "pop-art",
+  "doodle",
+  "grunge",
+  "mosaic",
+];
 
 const GeneratePage: NextPage = () => {
   // we are sending over numberOfIcons as a string instead of number, we need to parse it
@@ -27,10 +41,12 @@ const GeneratePage: NextPage = () => {
     prompt: "",
     color: "",
     shape: "",
+    style: "",
     numberOfIcons: "1",
   });
 
   const [imagesUrl, setImagesUrl] = useState<string[]>([]);
+  const [err, setErr] = useState<string>("");
 
   // creating a function that return a function
   // We can abstract this function away, make it a utility function
@@ -53,11 +69,16 @@ const GeneratePage: NextPage = () => {
         if (!item?.imageUrl) return;
         setImagesUrl((prev) => prev.concat(item.imageUrl));
       });
+      // setImagesUrl(data)
+    },
+    onError(error) {
+      setErr(error.message);
     },
   });
 
   function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setErr("");
     setImagesUrl([]);
     console.log(
       "submitting the form data to the backend, this is where tRPC starts to come to the play."
@@ -167,10 +188,37 @@ const GeneratePage: NextPage = () => {
           </FormGroup>
           {/* Shapes ends here */}
 
+          {/* Styles starts here */}
+          <FormGroup>
+            <h2 className="text-lg">4. Pick your icon style.</h2>
+            <div className="grid grid-cols-4">
+              {styles.map((style) => {
+                return (
+                  <label key={style} className="flex gap-2 text-xl">
+                    <input
+                      required
+                      type="radio"
+                      name="shape"
+                      checked={style === form.style}
+                      onChange={() =>
+                        setForm((prev) => ({
+                          ...prev,
+                          style,
+                        }))
+                      }
+                    ></input>
+                    {style}
+                  </label>
+                );
+              })}
+            </div>
+          </FormGroup>
+          {/* Styles ends here */}
+
           {/* Quantity input starts here */}
           <FormGroup>
             <label className="text-lg" htmlFor="numberOfImages">
-              4. How many images do you want (1 credit per image), you can
+              5. How many images do you want (1 credit per image), you can
               choose from 1 to 5.
             </label>
             <Input
@@ -184,12 +232,19 @@ const GeneratePage: NextPage = () => {
           </FormGroup>
           {/* Quantity input ends here */}
 
+          {/* Error message occurs when not enough credits */}
+          {err && (
+            <div className="rounded-md bg-red-500 p-4 text-center text-white">
+              {err}
+            </div>
+          )}
+
           <Button
             variant="secondary"
             disabled={generateIcon.isLoading}
             isLoading={generateIcon.isLoading}
           >
-            Submit
+            Generate Icons
           </Button>
         </form>
 
