@@ -31,7 +31,7 @@ async function generateIcons(
 ): Promise<string[] | undefined> {
   if (env.DALLE_MOCK === "true") {
     // return an Array of images, because user might choose to generate multiple icons
-    return new Array(numOfIcons).fill(b64Image);
+    return new Array(numOfIcons).fill(b64Image) || "";
   } else {
     const response = await openai.createImage({
       prompt,
