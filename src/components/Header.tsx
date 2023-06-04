@@ -65,9 +65,11 @@ const Header = () => {
       <div>
         {isLoggedIn ? (
           <div className="flex gap-4">
-            <div className="self-center rounded-md border border-pink-600 px-4 py-2 text-pink-600">
-              {`${credits} credits left`}
-            </div>
+            {credits !== undefined && (
+              <div className="self-center rounded-md border border-pink-600 px-4 py-2 text-pink-600">
+                {`${credits} credits left`}
+              </div>
+            )}
             <Button variant="secondary" onClick={buyCredits}>
               Buy Credits
             </Button>
