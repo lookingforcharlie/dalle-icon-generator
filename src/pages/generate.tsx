@@ -65,6 +65,7 @@ const GeneratePage: NextPage = () => {
   const generateIcon = api.generate.generateIcon.useMutation({
     onSuccess(data) {
       console.log("mutation finished", data);
+      if (!data) return;
       data.map((item) => {
         if (!item?.imageUrl) return;
         setImagesUrl((prev) => prev.concat(item.imageUrl));

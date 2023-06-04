@@ -25,7 +25,10 @@ const configuration = new Configuration({
 // make an openai object
 const openai = new OpenAIApi(configuration);
 
-async function generateIcons(prompt: string, numOfIcons = 1) {
+async function generateIcons(
+  prompt: string,
+  numOfIcons = 1
+): Promise<string[] | undefined> {
   if (env.DALLE_MOCK === "true") {
     // return an Array of images, because user might choose to generate multiple icons
     return new Array(numOfIcons).fill(b64Image);
@@ -36,6 +39,8 @@ async function generateIcons(prompt: string, numOfIcons = 1) {
       size: "512x512", //images can have a size of 256x256, 512x512, or 1024x1024 pixels.
       response_format: "b64_json", // We are using b64_json for storing images to S3
     });
+
+    if (!response) return;
 
     return response.data.data.map((result) => result.b64_json || "");
   }
@@ -111,6 +116,8 @@ export const generateRouter = createTRPCRouter({
         finalPrompt,
         input.numberOfIcons
       );
+
+      if (!base64EncodedImage) return;
 
       const createdIcons = await Promise.all(
         // Let's loop through base64EncodedImage
