@@ -2,7 +2,6 @@
 
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
-import rabbit_no_bg from "../../public/media/rabbit_bot_no_bg.png";
 import { useBuyCredits } from "../hooks/useBuyCredits";
 import { api } from "../utils/api";
 import { Button } from "./Button";
@@ -34,7 +33,11 @@ const Header = () => {
     }
   };
 
-  const credits = api.user.getUserCredits.useQuery().data;
+  // const credits = api.user.getUserCredits.useQuery().data;
+
+  const credits = api.user.getUserCredits.useQuery(undefined, {
+    enabled: isLoggedIn,
+  });
 
   return (
     <header className="container mx-auto my-3  flex h-16 max-w-6xl items-center justify-between px-2 sm:px-6">

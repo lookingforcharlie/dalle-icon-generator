@@ -73,6 +73,9 @@ const GeneratePage: NextPage = () => {
       // setImagesUrl(data)
     },
     onError(error) {
+      if (error.message === "UNAUTHORIZED") {
+        setErr("Please sign in to generate icons.");
+      }
       setErr(error.message);
     },
   });
