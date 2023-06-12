@@ -207,7 +207,7 @@ const Header = () => {
           // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
           className={`bottom absolute left-0 top-0 h-1 w-7 translate-y-5 rotate-0 bg-orange-600 transition-transform duration-300 ${
             isOpenHamburger
-              ? "-translate-x-0 translate-y-3.5 -rotate-45 transform"
+              ? "-translate-x-0 translate-y-3.5 -rotate-90 transform"
               : ("" as string)
           }`}
         ></span>
