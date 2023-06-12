@@ -185,15 +185,16 @@ const Header = () => {
       <button
         onClick={() => setIsOpenHamburger((prev) => !prev)}
         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-        className={`relative z-40 h-8 w-8 border-orange-500 transition-transform duration-300 ease-in lg:hidden ${
-          isOpenHamburger ? "translate-y-0" : ("" as string)
-        }`}
+        // className={`relative z-40 h-8 w-8 border-orange-500 transition-transform duration-300 ease-in lg:hidden ${
+        //   isOpenHamburger ? "translate-y-0" : ("" as string)
+        // }`}
+        className="relative z-40 h-8 w-8 border-orange-500 transition-transform duration-300 ease-in lg:hidden"
       >
         <span
           // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
           className={`top absolute left-0 top-0 h-1 w-7 rotate-0 bg-orange-600 transition-transform duration-300 ${
             isOpenHamburger
-              ? "translate-x-0 translate-y-3.5 rotate-45 transform"
+              ? "translate-y-3.5 rotate-45 transform"
               : ("" as string)
           }`}
         ></span>
@@ -207,7 +208,7 @@ const Header = () => {
           // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
           className={`bottom absolute left-0 top-0 h-1 w-7 translate-y-5 rotate-0 bg-orange-600 transition-transform duration-300 ${
             isOpenHamburger
-              ? "-translate-x-0 translate-y-3.5 -rotate-90 transform"
+              ? " translate-y-3.5 -rotate-45 transform"
               : ("" as string)
           }`}
         ></span>
