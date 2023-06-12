@@ -184,14 +184,12 @@ const Header = () => {
 
       <button
         onClick={() => setIsOpenHamburger((prev) => !prev)}
-        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         // className={`relative z-40 h-8 w-8 border-orange-500 transition-transform duration-300 ease-in lg:hidden ${
         //   isOpenHamburger ? "translate-y-0" : ("" as string)
         // }`}
         className="relative z-40 h-8 w-8 border-orange-500 transition-transform duration-300 ease-in lg:hidden"
       >
         <span
-          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
           className={`top absolute left-0 top-0 h-1 w-7 rotate-0 bg-orange-600 transition-transform duration-300 ${
             isOpenHamburger
               ? "translate-y-3.5 rotate-45 transform"
@@ -199,19 +197,26 @@ const Header = () => {
           }`}
         ></span>
         <span
-          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
           className={`middle absolute left-0 top-0 h-1 w-7 translate-y-2.5 rotate-0 bg-orange-600 transition-transform duration-300 ${
             isOpenHamburger ? "hidden" : ("" as string)
           }`}
         ></span>
-        <span
-          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+        {/* <span
           className={`bottom absolute left-0 top-0 h-1 w-7 translate-y-5 rotate-0 bg-orange-600 transition-transform duration-300 ${
             isOpenHamburger
-              ? " translate-y-3.5 -rotate-45 transform"
+              ? "translate-y-3.5 -rotate-45 transform"
               : ("" as string)
           }`}
-        ></span>
+        ></span> */}
+        <span className="bottom absolute left-0 top-0 h-1 w-7 transition-transform duration-300">
+          <span
+            className={`bottom-line bg-orange-600 ${
+              isOpenHamburger
+                ? "translate-y-3.5 -rotate-45 transform"
+                : ("" as string)
+            }`}
+          ></span>
+        </span>
       </button>
 
       {/* Ends */}
