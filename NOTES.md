@@ -2,6 +2,24 @@
 
 ## prisma folder: this is where we define our schema
 
+1. NextAuth takes care of model
+
+## Next.JS App folder directories
+
+- pages -> api: next.js treats them like api endpoints.
+
+1. Request from frond end actually call pages/api/trpc/
+1. You can create traditonal Restful API inside the folder.
+1. We put stripe.ts endpoint here.
+1. trpc and auth are provided by T3 stack out of box.
+
+## /server: tRPC server directory
+
+1. From trpc.ts, trpc provides 'publicProcedure' for all the users and 'privateProcedure' for only login users
+2. From root.ts, this is where we create routers, like express routers with all kinds of functions
+
+## /utils/api.ts: boilerplate code to set up the connection from front end and back end from trpc
+
 ## npx prisma studio: load up a tool connected to the local Sqlite database
 
 ## Create tRPC router for generating icons:
@@ -142,15 +160,3 @@ How to fix it? add following into rules of .eslintrc.cjs
 2. Modified function generateIcons in generate.ts, modified the return value from a string to an Array of String
 3. Now, generateRouter returns an Array of image urls.
 4. In the frontend, the imagesUrl becomes an Array of String, we need loop through imagesUrl to render multiple icons on the page
-
-## Adding shape and style option for generating icons
-
-## What's next?
-
-1. Add Indication at Landing Page
-2. Perhaps add a demo video how to use it.
-3. Add footer
-4. Replace the user options with images
-5. Modify Stripe settings if go Production: toggle to Production mode, set different keys on Amplify
-6. Setup PostgreSql locally: don't mess up with the users database, when developing locally.
-7. use S3 locally by Mock? Create a different bucket

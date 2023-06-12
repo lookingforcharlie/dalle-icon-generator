@@ -1,3 +1,4 @@
+// @ts-nocheck
 /** @type {import('tailwindcss').Config} */
 const config = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
@@ -13,6 +14,7 @@ const config = {
     extend: {},
   },
   plugins: [],
+  // plugins: [require("flowbite/plugin")],
 };
 
 module.exports = config;

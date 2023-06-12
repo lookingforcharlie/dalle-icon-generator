@@ -20,6 +20,8 @@
     "@trpc/react-query": "^10.9.0",
     "@trpc/server": "^10.9.0",
     "aws-sdk": "^2.1386.0",
+    "flowbite": "^1.6.5",
+    "flowbite-react": "^0.4.7",
     "micro": "^10.0.1",
     "next": "^13.2.1",
     "next-auth": "^4.19.0",

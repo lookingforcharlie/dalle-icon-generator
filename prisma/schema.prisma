@@ -20,7 +20,8 @@ model Example {
     updatedAt DateTime @updatedAt
 }
 
-// Necessary for Next auth
+// Next Auth will take care of 'model Account', 'model session' 
+// Necessary for Next auth, 
 model Account {
     id                String  @id @default(cuid())
     userId            String
@@ -47,6 +48,7 @@ model Session {
     user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+// user has multiple Accounts and multiple Sessions
 // 'model user' has One to Many relationship with 'model Icons'
 model User {
     id            String    @id @default(cuid())
