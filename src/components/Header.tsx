@@ -186,7 +186,7 @@ const Header = () => {
         onClick={() => setIsOpenHamburger((prev) => !prev)}
         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         className={`relative z-40 h-8 w-8 border-orange-500 transition-transform duration-300 ease-in lg:hidden ${
-          isOpenHamburger ? "translate-y-0 rotate-90" : ("" as string)
+          isOpenHamburger ? "translate-y-0" : ("" as string)
         }`}
       >
         <span
