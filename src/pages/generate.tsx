@@ -206,7 +206,7 @@ const GeneratePage: NextPage = () => {
                     <input
                       required
                       type="radio"
-                      name="shape"
+                      name="style"
                       checked={style === form.style}
                       onChange={() =>
                         setForm((prev) => ({
