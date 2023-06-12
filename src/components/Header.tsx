@@ -201,22 +201,13 @@ const Header = () => {
             isOpenHamburger ? "hidden" : ("" as string)
           }`}
         ></span>
-        {/* <span
+        <span
           className={`bottom absolute left-0 top-0 h-1 w-7 translate-y-5 rotate-0 bg-orange-600 transition-transform duration-300 ${
             isOpenHamburger
-              ? "translate-y-3.5 -rotate-45 transform"
+              ? "!translate-y-3.5 !-rotate-45 !transform"
               : ("" as string)
           }`}
-        ></span> */}
-        <span className="bottom absolute left-0 top-0 h-1 w-7 transition-transform duration-300">
-          <span
-            className={`bottom-line bg-orange-600 ${
-              isOpenHamburger
-                ? "translate-y-3.5 -rotate-45 transform"
-                : ("" as string)
-            }`}
-          ></span>
-        </span>
+        ></span>
       </button>
 
       {/* Ends */}
