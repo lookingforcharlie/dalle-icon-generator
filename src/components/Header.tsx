@@ -186,27 +186,29 @@ const Header = () => {
         onClick={() => setIsOpenHamburger((prev) => !prev)}
         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         className={`relative z-40 h-8 w-8 border-orange-500 transition-transform duration-300 ease-in lg:hidden ${
-          isOpenHamburger && "translate-y-0 rotate-90"
+          isOpenHamburger ? "translate-y-0 rotate-90" : ("" as string)
         }`}
       >
         <span
           // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
           className={`top absolute left-0 top-0 h-1 w-7 rotate-0 bg-orange-600 transition-transform duration-300 ${
-            isOpenHamburger &&
-            "translate-x-0 translate-y-3.5 rotate-45 transform"
+            isOpenHamburger
+              ? "translate-x-0 translate-y-3.5 rotate-45 transform"
+              : ("" as string)
           }`}
         ></span>
         <span
           // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
           className={`middle absolute left-0 top-0 h-1 w-7 translate-y-2.5 rotate-0 bg-orange-600 transition-transform duration-300 ${
-            isOpenHamburger && "hidden"
+            isOpenHamburger ? "hidden" : ("" as string)
           }`}
         ></span>
         <span
           // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
           className={`bottom absolute left-0 top-0 h-1 w-7 translate-y-5 rotate-0 bg-orange-600 transition-transform duration-300 ${
-            isOpenHamburger &&
-            "-translate-x-0 translate-y-3.5 -rotate-45 transform"
+            isOpenHamburger
+              ? "-translate-x-0 translate-y-3.5 -rotate-45 transform"
+              : ("" as string)
           }`}
         ></span>
       </button>
@@ -219,7 +221,7 @@ const Header = () => {
         id="mobile-menu"
         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         className={`z-100 absolute left-6 right-6 top-20  rounded-lg  bg-stone-900 p-6 opacity-90 ${
-          !isOpenHamburger && "hidden"
+          !isOpenHamburger ? "hidden" : ("" as string)
         }`}
       >
         {isLoggedIn ? (
