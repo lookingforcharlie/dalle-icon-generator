@@ -39,11 +39,23 @@ const Home: NextPage = () => {
       </Head>
       <main className="container mx-auto flex min-h-screen flex-col items-center justify-start ">
         <HeroBanner />
-        <div className="mt-24 px-12 text-left xl:px-36">
-          <h1 className="text-4xl leading-10">
+        {/* <div className="mt-24 flex flex-col items-center gap-8 px-12 text-left xl:px-36"> */}
+        <div className="mt-12 grid max-w-6xl grid-cols-1 place-items-start gap-12 px-12">
+          <h1 className="flex-wrap text-4xl leading-10">
             I am delighted to offer newly registered users 10 credits that can
             be used to generate your very own stunning icons.
           </h1>
+          <div className="mx-auto">
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/8SIAU4kHrvM"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            ></iframe>
+          </div>
         </div>
       </main>
     </>
