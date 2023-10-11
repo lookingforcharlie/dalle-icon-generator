@@ -45,17 +45,17 @@ const Home: NextPage = () => {
             I am delighted to offer newly registered users 10 credits that can
             be used to generate your very own stunning icons.
           </h1>
-          <div className="mx-auto">
-            <iframe
-              width="560"
-              height="315"
-              src="https://www.youtube.com/embed/8SIAU4kHrvM"
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            ></iframe>
-          </div>
+        </div>
+        <div className="mx-auto mt-8 flex w-1/4 items-center justify-center md:w-1/2 lg:w-1/2 ">
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/8SIAU4kHrvM"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          ></iframe>
         </div>
       </main>
     </>
